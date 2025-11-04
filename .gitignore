@@ -1,0 +1,10 @@
+# Carpetas generadas por Maven/NetBeans
+target/
+nbproject/private/
+
+# Archivos temporales
+*.log
+*.DS_Store
+
+# Configuración sensible (opcional)
+config.properties

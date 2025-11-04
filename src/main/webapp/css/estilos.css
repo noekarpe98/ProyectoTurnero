@@ -1,0 +1,593 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 14 oct 2025, 5:50:35 p. m.
+    Author     : Noe
+*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 50px;
+}
+
+form {
+    width: 300px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], input[type="time"] {
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Mensaje de error */
+.error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+main {
+    padding-top: 40px; /* evita que el contenido quede debajo del header */
+}
+
+/* BOTONES */
+button {
+    background-color: #004080;  /* azul oscuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0066cc;
+}
+
+button.eliminar {
+    background-color: #cc0000;
+}
+
+button.eliminar:hover {
+    background-color: #ff3333;
+}
+
+button.nuevo {
+    background-color: #28a745;
+    margin-top: 30px;
+    margin-left: 280px; /* empuja el botón a la derecha */
+}
+
+button.nuevo:hover {
+    background-color: #45c768;
+    
+}
+
+button.nuevocliente {
+    background-color: #28a745;
+    margin-top: 30px;
+    margin-left: 610px; /* empuja el botón a la derecha */
+}
+
+button.nuevocliente:hover {
+    background-color: #45c768;
+}
+
+
+/* Contenedor cliente y autocompletado */
+#clienteDiv {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+/* Lista de sugerencias */
+#sugerencias {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 0;
+    margin: 4px 0 0 0;
+    list-style: none;
+    display: none;
+}
+
+.opcionCliente {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.opcionCliente:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Scroll estilizado */
+#sugerencias::-webkit-scrollbar {
+    width: 6px;
+}
+
+#sugerencias::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+#sugerencias::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Botón "Agregar Cliente Nuevo" */
+#btnAgregarCliente {
+    display: none;
+    background-color: #ffc107;
+    color: #000;
+    margin-top: 15px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+#btnAgregarCliente:hover {
+    background-color: #e0a800;
+}
+
+/* === MODAL CENTRADO EN PANTALLA === */
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+    background-color: #ccc;
+    color: #333;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-cancelar:hover { background-color: #bdbdbd; }
+.btn-eliminar:hover { background-color: #c0392b; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ========================================================== */
+/* 🔹 NUEVOS ESTILOS PARA TURNOS Y FILTROS */
+/* ========================================================== */
+
+.contenedor-turnos {
+    padding: 20px;
+    padding-top: 100px; 
+
+}
+.contenedor-clientes {
+    padding: 20px;
+    padding-top: 100px;
+
+
+}
+.contenedor-turnosnuevos {
+    padding: 20px;
+    padding-top: 100px; 
+
+}
+
+.filtros {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+
+
+.filtros label {
+    font-weight: bold;
+}
+
+.filtros input{
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 350px; /* ancho fijo para el buscador */
+    margin-top: 20px;
+}
+
+.filtros select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 200px; /* ancho fijo para el FILTRO */
+    margin-top: 10px;
+}
+
+.tabla-turnos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-turnos th,
+.tabla-turnos td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.tabla-turnos thead {
+    background-color: #f2f2f2;
+}
+
+.estado.disponible {
+    color: green;
+    font-weight: bold;
+}
+
+.estado.reservado {
+    color: red;
+    font-weight: bold;
+}
+
+
+.select-estilo {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 220px;
+}
+.buscador-estilo {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* 🔹 Ajuste del buscador de clientes */
+.filtros label[for="buscarCliente"] {
+    margin-top: 10px;     /* baja un poquito el label */
+}
+
+#buscarCliente {
+    padding: 6px 10px;   /* da un aspecto más uniforme */
+    margin-top: 30px;     /* lo baja un poco */
+}
+
+.encabezado-tabla {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.form-buttons {
+    margin-top: 40px; /* separa del campo anterior */
+    display: flex;
+    gap: 10px; /* separa los botones entre sí */
+}
+.btn-guardar, .btn-cancelar {
+    padding: 8px 16px; /* más cómodo */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ========================================================== */
+/* ESTILO HEADER */
+/* ========================================================== */
+
+/* Header principal */
+header {
+    background-color: #004080;
+    color: white;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Contenedor flexible del header */
+.header-container {
+    display: flex;
+    flex-direction: column; /* título arriba, nav abajo */
+    gap: 10px;
+    margin-top: 10px
+}
+.header-containerdos {
+    display: flex;
+    flex-direction: column; /* título arriba, nav abajo */
+    gap: 10px;
+    margin-right: 50px
+}
+
+/* Título */
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+/* Nav debajo del título */
+header nav.header-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 500px;
+    align-items: center;
+    margin-top: 20px
+}
+
+/* Grupo de links a la izquierda */
+header nav.header-nav .links {
+    display: flex;
+    gap: 15px;
+}
+
+/* Estilo de los enlaces */
+header nav a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header nav a:hover {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+/* Cerrar sesión distinto */
+header nav a.logout {
+    background-color: #e74c3c;
+}
+
+header nav a.logout:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive básico */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    header nav.header-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    header nav.header-nav .links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+/* Aplicamos la fuente a todo el header */
+header {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo del título */
+header h1 {
+    font-weight: 700;       /* más negrita */
+    font-size: 2em;         /* más grande */
+    letter-spacing: 1px;    /* más separación entre letras */
+}
+
+/* Enlaces del menú */
+header nav a {
+    font-size: 1.1em;       /* un poco más grandes */
+    font-weight: 600;       /* semi negrita */
+    letter-spacing: 0.5px;  /* ligera separación */
+}
+
+/* Enlace de "Cerrar sesión" un poco más fuerte */
+header nav a.logout {
+    font-weight: 700;
+}
+
+/* ========================================================== */
+/* ESTILOS PARA TÍTULOS DE SECCIONES (Turnos, Clientes, etc.) */
+/* ========================================================== */
+
+/* Fuente moderna y color */
+h2, h3 {
+    font-family: 'Poppins', sans-serif; /* misma fuente del header */
+    color: #004080;                      /* azul oscuro para contraste */
+    font-weight: 700;                    /* negrita */
+    letter-spacing: 0.5px;
+    margin-bottom: 25px; 
+}
+
+/* Si querés un color diferente para títulos dentro de main */
+main h2, main h3 {
+    color: #003366;                      /* tono más profundo */
+}
+
+/* Si querés mantenerlos centrados o con un poco más de presencia */
+h2 {
+    font-size: 1.8em;
+    text-align: left; 
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+h3 {
+    font-size: 1.4em;
+    text-align: left;
+    border-bottom: 2px solid #004080;
+    padding-bottom: 5px;
+}
+/* ========================================================== */
+/* ESTILO LOGIN - MODERNO, CENTRADO Y COMPACTO */
+/* ========================================================== */
+
+body.login-body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #004080, #0073e6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.login-container {
+    background-color: #ffffff;
+    padding: 40px 40px; /* menos espacio interno */
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 320px;
+    animation: fadeIn 0.6s ease;
+}
+
+/* Título */
+.login-container h2 {
+    color: #004080;
+    font-weight: 700;
+    margin-bottom: 15px;/* más compacto */
+    margin-left: 35px;
+}
+
+
+/* Formulario centrado */
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Inputs */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 90%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-container input[type="email"]:focus,
+.login-container input[type="password"]:focus {
+    border-color: #0073e6;
+    box-shadow: 0 0 6px rgba(0,115,230,0.4);
+    outline: none;
+}
+
+/* Botón de enviar */
+.login-container input[type="submit"] {
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 70%;              /* ancho centrado y moderado */
+    margin-top: 5px;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #0066cc;
+}
+
+/* Mensaje de error */
+.login-container .error {
+    color: #e74c3c;
+    background-color: #fce4e4;
+    padding: 8px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
